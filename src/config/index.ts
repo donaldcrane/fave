@@ -8,7 +8,6 @@ const config = {
   logger: logger(),
   PORT: process.env.PORT,
   MONGO_URL: process.env.MONGO_URL,
-  TEST_MONGO_URLL: process.env.TEST_MONGO_URL,
   JWT_KEY: process.env.JWT_KEY,
   APP_NAME: process.env.APP_NAME,
   CLOUD_NAME: process.env.CLOUD_NAME,
