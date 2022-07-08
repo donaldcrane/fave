@@ -1,5 +1,9 @@
 # fave
 
+[![Node.js CI](https://github.com/donaldcrane/fave/actions/workflows/.node.js.yml/badge.svg)](https://github.com/donaldcrane/fave/actions/workflows/.node.js.yml)
+
+[![Coverage Status](https://coveralls.io/repos/github/donaldcrane/fave/badge.svg?branch=main)](https://coveralls.io/github/donaldcrane/fave?branch=main)
+
 Fave is a RESTful API service inventory management app
 
 # Documentation

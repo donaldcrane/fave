@@ -18,7 +18,7 @@ const userSeed = [
     },
     {
       _id: "626a930263c8523170450619",
-      email: "donaldagbakoba@gmail.com",
+      email: "donald@gmail.com",
       password: hash,
       firstName: "Donald",
       lastName: "Agbakoba",

@@ -7,8 +7,9 @@
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
     "postinstall": "tsc",
+    "build": "tsc",
     "seed": "ts-node src/seeder/seeder.ts",
-    "test": "npm run seed &&  nyc --require --reporter=html --reporter=text mocha -r ts-node/register './dist/tests/index.js' --timeout 50000 --recursive --exit || true ",
+    "test": "npm run build && nyc --require --reporter=html --reporter=text mocha -r ts-node/register './dist/tests/index.js' --timeout 50000 --recursive --exit || true ",
     "coverage": "nyc npm run test && nyc report --reporter=text-lcov --reporter=lcov | ts-node/register ./node_modules/coveralls/bin/coveralls.js --verbose"
   },
   "repository": {

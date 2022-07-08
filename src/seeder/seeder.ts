@@ -21,3 +21,5 @@ mongoose.connect(process.env.MONGO_URL as string, async () => {
   });
   console.log('seeding completed...');
 });
+
+  // mongoose.connection.close()

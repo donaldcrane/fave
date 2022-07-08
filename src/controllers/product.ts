@@ -87,6 +87,6 @@ export default class ProductController {
     const newProduct = await models.Product.findByIdAndUpdate(
       productId, req.body, { new: true }
     );
-    return successResponse(res, 200, "Successfully edited Product.", newProduct);
+    return successResponse(res, 200, "Successfully updated Product.", newProduct);
   }
 }

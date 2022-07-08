@@ -13,15 +13,9 @@ const storage = new CloudinaryStorage({
 });
 const parser = multer({
   storage,
-  folder: "uploads",
-  allowedFormats: ["jpg", "png", "jpeg", "gif"],
-  quality_analysis: true,
-  transformation: [{
-    width: "315", crop: "fill", gravity: "faces", radius: 50, effect: "saturation:50", height: "250"
-  }],
   limits: {
-    fieldSize: 25 * 1024 * 1024
-  }
-});
+    fileSize: 5120 * 1024 * 1024,
+  },
+}) ;
 
 export default parser;

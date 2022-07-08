@@ -1,9 +1,8 @@
 import chai from "chai";
+import fs from "fs";
 import chaiHttp from "chai-http";
 import server from "../../app";
-import { user, user2, user3, user8 } from "./user-sign-in-test-data";
-import { IUser } from "../../utils/interface";
-import { user4 } from "./user-sign-in-test-data";
+import { user, user2, user3, user4, profile, photo } from "./user-sign-in-test-data";
 
 const { expect } = chai;
 chai.should();
@@ -48,79 +47,55 @@ describe("Should test all users", async () => {
     });
   });
 
-  describe("GET User api route", () => {
+  describe("should handle single user's operation", () => {
     let userToken: string;
-    before(done => {
+    before((done) => {
       chai
         .request(server)
         .post("/api/v1/users/signin")
         .set("Accept", "application/json")
-        .send(user)
+        .send(user4)
         .end((err, res) => {
           if (err) throw err;
           userToken = res.body.data.token;
           done();
         });
     });
-    it("returns user beneficiaries", done => {
+    it("it should not update a user's profile who is not signed in", (done) => {
       chai
         .request(server)
-        .get("/api/v1/users/beneficiaries")
-        .set("Authorization", `Bearer ${userToken}`)
+        .patch("/api/v1/users/profile")
+        .send(profile)
         .end((err, res) => {
-          const { body } = res;
-          const { data } = body;
-          expect(body.statusCode).to.equal(200);
-          expect(body.message).to.equal("Successfully retrived all beneficiaries");
-
-          data.forEach((users: IUser[]) => {
-            expect(users).to.have.property("id");
-            expect(users).to.have.property("owner");
-            expect(users).to.have.property("beneficiaryName");
-            expect(users).to.have.property("beneficiaryEmail");
-            expect(users).to.have.property("beneficiaryId");
-          });
-
-          expect(data).to.be.an("array");
+          res.should.have.status(401);
+          expect(res.body.error).to.equal("Authorization not found");
+          done();
+        });
+    });
+    it("it should update a logged in user's profile", (done) => {
+      chai
+        .request(server)
+        .patch("/api/v1/users/profile")
+        .set("Authorization", `Bearer ${userToken}`)
+        .send(profile)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property("message").eql("Profile updated Successfully");
+          done();
+        });
+    });
+    it("it should update a logged in user's profile picture", (done) => {
+      chai
+        .request(server)
+        .patch("/api/v1/users/picture")
+        .set("Authorization", `Bearer ${userToken}`)
+      .set("content-type", "form-data")
+        .attach("image", fs.readFileSync(`${__dirname}/file.jpg`), "file.jpg")
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property("message").eql("Profile picture Updated Successfully");
           done();
         });
     });
   });
-});
-
-describe("Add beneficiary account", () => {
-  let userToken :string ;
-  before(done => {
-    chai
-      .request(server)
-      .post("/api/v1/users/signin")
-      .set("Accept", "application/json")
-      .send(user8)
-      .end((err, res) => {
-        if (err) throw err;
-        userToken = res.body.data.token;
-        done();
-      });
-  });
-  it("should allow user add beneficiary account", done => {
-    chai
-      .request(server)
-      .post("/api/v1/users/beneficiary/1857f7f4-a3e0-4bd4-b1f3-b98c045b4ed2")
-      .set("Authorization", `Bearer ${userToken}`)
-      .set("Accept", "application/json")
-      .end((err, res) => {
-        expect(res).to.have.status(201);
-        expect(res.body.message).to.equal("Successfully added beneficiary account.");
-        done();
-      });
-  });
-  it("should not allow user without token add his beneficiary account", done => {
-    chai
-      .request(server)
-      .post("/api/v1/users/beneficiary/ae7025ad-65b6-44d7-97f0-daeb2db01a40")
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        done();
-      });
-  });
-});
+})

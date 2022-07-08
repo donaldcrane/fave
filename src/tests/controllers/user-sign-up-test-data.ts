@@ -1,20 +1,26 @@
 const user = {
-  name: "garry Tayo",
+  firstName: "Garry",
+  lastName: "Tayo",
   email: "garrasdy@gmail.com",
-  password: "123456"
+  password: "password",
+  phone: "+2348100581856"
 };
 const user2 = {
-  password: "123456",
+  password: "password",
 };
 const user3 = {
-  name: "Grace Paul",
+  firstName: "Tayo",
+  lastName: "Garry",
+  phone: "+2348100581856",
   email: "garrasdy@gmail.com",
-  password: "123456",
+  password: "password",
 };
 const user4 = {
-  name: "Anini William",
+  firstName: "Anini",
+  lastName: "William",
   email: "anini@gmail.com",
-  password: "123456",
+  password: "password",
+  phone: "+2348100581856"
 };
 
 export {

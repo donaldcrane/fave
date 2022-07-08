@@ -1,6 +1,6 @@
 const user = {
   email: "garrasdy@gmail.com",
-  password: "123456",
+  password: "password",
 };
 const user2 = {
   email: "garry@gmail.com",
@@ -10,28 +10,24 @@ const user3 = {
   password: "fghygvh",
 };
 const user4 = {
-  email: "garrasdy@gmail.com",
-  password: "123456",
-};
-const user5 = {
-  email: "godspower@gmail.com",
-  password: "123456",
-};
-
-const user6 = {
-  email: "francis@gmail.com",
-  password: "123456"
-};
-
-const user7 = {
-  email: "fiyin@gmail.com",
-  password: "123456",
-};
-const user8 = {
   email: "donald@gmail.com",
   password: "password",
 };
 
+const admin = {
+  email: "favour@gmail.com",
+  password: "password",
+};
+
+const profile = {
+  firstName: "garrasdy",
+  lastName: "ovie",
+};
+
+const photo = {
+  photo: "http://example.com"
+};
+
 export {
-  user, user2, user3, user4, user5, user6, user7, user8
+  user, user2, user3, user4, profile, photo, admin
 };

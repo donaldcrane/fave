@@ -73,5 +73,22 @@ export default class CartController {
     const updatedCart = await models.Cart.findById(cartId).populate("products");
     return successResponse(res, 200, "Product successfully removed from Cart.", updatedCart);
   }
+
+   /**
+   * @param {object} req - The user request object
+   * @param {object} res - The user response object
+   * @returns {object} Success message
+   */
+  static async getUserCart(req: Request, res: Response) {
+    const { _id } = req.user;
+    const cart = await models.Cart.findOne({ user: _id?.toString() }).populate("products");
+    if(!cart) { return errorResponse(res, 404, "User does not exist kindly create one.")}
+    return successResponse(
+      res,
+      200,
+      "Successfully retrieved user cart.",
+      cart
+    );
+  }
 }
  

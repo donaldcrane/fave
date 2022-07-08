@@ -1,11 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import server from "../../app";
-import {
-  user,
-  user2,
-  user3
-} from "./user-sign-up-test-data";
+import { user, user2, user3 } from "./user-sign-up-test-data";
 
 chai.should();
 chai.use(chaiHttp);
@@ -21,7 +17,7 @@ describe("Should test all users", async () => {
           res.should.have.status(201);
           res.body.should.be.a("object");
           res.body.should.have.property("statusCode").eql(201);
-          res.body.should.have.property("message").eql("User created Successfuly, Kindly log in!");
+          res.body.should.have.property("message").eql("Account created successfully, kindly login.");
           done();
         });
     });

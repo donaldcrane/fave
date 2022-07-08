@@ -8,12 +8,15 @@ import { validateAddToCart, validateRemoveFromCart, validateCartId } from "../va
 const router = Router();
 const { verifyToken } = Authentication;
 const {
-  addProductToCart, removeProductFromCart, deleteCart
+  addProductToCart, removeProductFromCart, deleteCart, getUserCart
 } = CartController;
 
 
+router.get("/", verifyToken, getUserCart);
+
 router.patch("/product", verifyToken, validator(validateAddToCart), addProductToCart);
 router.patch("/remove", verifyToken, validator(validateRemoveFromCart), removeProductFromCart);
-router.delete("/:cartId", verifyToken,validator(validateCartId), deleteCart);
+
+router.delete("/:cartId", verifyToken, validator(validateCartId), deleteCart);
 
 export default router;
