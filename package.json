@@ -10,7 +10,7 @@
     "build": "tsc",
     "seed": "ts-node src/seeder/seeder.ts",
     "test": "npm run build && nyc --require --reporter=html --reporter=text mocha -r ts-node/register './dist/tests/index.js' --timeout 50000 --recursive --exit || true ",
-    "coverage": "nyc npm run test && nyc report --reporter=text-lcov --reporter=lcov | ts-node/register ./node_modules/coveralls/bin/coveralls.js --verbose"
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov --reporter=lcov | node ./node_modules/coveralls/bin/coveralls.js --verbose"
   },
   "repository": {
     "type": "git",
