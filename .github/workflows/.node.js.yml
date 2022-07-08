@@ -38,12 +38,12 @@ jobs:
         CI: true
         NODE_ENV: test
         JWT_KEY: ${{ secrets.JWT_KEY }}
-        TEST_DATABASE_URL: mongodb://localhost:27017/crane
-        COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
+        MONGO_URL: mongodb://localhost:27017/crane
         API_KEY: ${{ secrets.API_KEY }}
         API_SECRET: ${{ secrets.API_SECRET }}
         CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
-        API_NAME: ${{ secrets.API_NAME }}
+        API_NAME: ${{ secrets.APP_NAME }}
+        PORT: ${{ secrets.PORT }}
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
